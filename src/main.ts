@@ -6,5 +6,5 @@ Vue.config.productionTip = false
 new Vue({
   components: { },
   el: '#app',
-  template: '<h1>Hello vue</h1>',
+  template: '<h1>Hello vue (docs)</h1>',
 })
