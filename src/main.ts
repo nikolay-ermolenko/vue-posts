@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import vuetify from '@/plugins/vuetify'
+// import vuetify from '@/plugins/vuetify'
 import App from '@/App.vue'
 
 Vue.config.productionTip = false
@@ -7,7 +7,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   components: { App },
-  vuetify,
+  // vuetify,
   el: '#app',
   template: '<App />',
 })
