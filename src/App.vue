@@ -1,5 +1,7 @@
 <template>
-  <h1>Hello</h1>
+  <v-app>
+    <h1>Hello</h1>
+  </v-app>
   <!-- <v-app>
     <v-main>
       <v-container class="fill-heightd">
