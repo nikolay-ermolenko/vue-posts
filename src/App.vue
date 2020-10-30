@@ -3,8 +3,7 @@
     <v-app-bar
       app
       color="primary"
-      dark
-    >
+      dark>
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -12,8 +11,7 @@
           contain
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
           transition="scale-transition"
-          width="40"
-        />
+          width="40"/>
 
         <v-img
           alt="Vuetify Name"
@@ -21,41 +19,57 @@
           contain
           min-width="100"
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+          width="100"/>
       </div>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <v-btn
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
         target="_blank"
-        text
-      >
+        text>
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <HelloWorld />
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { Vue, Component } from 'vue-property-decorator';
+import { of } from 'rxjs';
+import { delay, first, tap } from 'rxjs/operators';
+
 import HelloWorld from './components/HelloWorld.vue';
 
-export default Vue.extend({
-  name: 'App',
+export function appMountedFn() {
+  const loaderEl: HTMLElement | null = document.getElementById('init-loader');
 
+  if (!loaderEl) return;
+
+  of(1)
+    .pipe(
+      first(),
+      tap(() => loaderEl.classList.add('fade-out')),
+      delay(1000),
+    ).subscribe(() => {
+      loaderEl.style.setProperty('display', 'none');
+      loaderEl.classList.remove('fade-out');
+    });
+}
+
+@Component({
   components: {
     HelloWorld,
   },
-
-  data: () => ({
-    //
-  }),
-});
+})
+export default class App extends Vue {
+  private mounted(): void {
+    appMountedFn.apply(this);
+  }
+}
 </script>
