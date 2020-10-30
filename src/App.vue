@@ -54,6 +54,7 @@ export function appMountedFn() {
   of(1)
     .pipe(
       first(),
+      delay(1000),
       tap(() => loaderEl.classList.add('fade-out')),
       delay(1000),
     ).subscribe(() => {
