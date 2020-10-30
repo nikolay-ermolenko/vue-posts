@@ -1,75 +1,61 @@
 <template>
   <v-app>
-    <h1>Hello</h1>
-  </v-app>
-  <!-- <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
     <v-main>
-      <v-container class="fill-heightd">
-        <v-row align="center">
-          <h3>Hello vue [avoid value = "zzz"]</h3>
-        </v-row>
-        <v-row>
-          <v-slider 
-            v-model="buffer" 
-            label="Buffer size (ms)" 
-            :hint="buffer.toString()"
-            persistent-hint
-            step="50"
-            min="0" 
-            max="900" />
-        </v-row>
-        <v-row align="center">
-            <v-text-field
-              ref="input"
-              label="Value"
-              @input="onTextFieldChange" />
-        </v-row>
-        <v-row align="center">
-          <p class="value">{{ text}}</p>
-        </v-row>
-      </v-container>
+      <HelloWorld/>
     </v-main>
-  </v-app> -->
+  </v-app>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-// import Vue from 'vue'
-// import Base from '@/common/Base.vue'
-// import Component from 'vue-class-component'
-// import { BehaviorSubject, timer } from 'rxjs'
-// import { debounce, filter, map, distinctUntilChanged } from 'rxjs/operators'
+import Vue from 'vue';
+import HelloWorld from './components/HelloWorld.vue';
 
-@Component
-export default class App extends Vue {
-  // private buffer: number = 500
-  // private defaultValue: string = 'DEFAULT'
-  // private inputValue: string = ''
-  // private text: string = ''
+export default Vue.extend({
+  name: 'App',
 
-  // private subject$: BehaviorSubject<string> 
-  //   = new BehaviorSubject<string>(this.defaultValue)
+  components: {
+    HelloWorld,
+  },
 
-  // private created(): void {
-  //   this.observerSafe$(this.subject$)
-  //     .pipe(
-  //       debounce(() => timer(this.buffer)),
-  //       distinctUntilChanged(),
-  //       filter((value: string) => value.toLowerCase() !== 'zzz'),
-  //       map((value: string) => value.toLowerCase()),
-  //     )
-  //     .subscribe((value: string) => this.text = value)
-  // }
-
-  // private onTextFieldChange(value: string): void {
-  //   this.subject$.next(value || this.defaultValue)
-  // }
-}
+  data: () => ({
+    //
+  }),
+});
 </script>
-
-<style scoped>
-.value {
-  font-family: monospace;
-  background: #ffe;
-}
-</style>

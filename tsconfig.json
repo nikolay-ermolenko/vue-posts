@@ -15,11 +15,7 @@
     "types": [
       "webpack-env",
       "vuetify",
-      "vuex-module-decorators"
-    ],
-    "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/vuetify/types"
+      "jest"
     ],
     "paths": {
       "@/*": [
