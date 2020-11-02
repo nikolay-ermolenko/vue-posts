@@ -35,3 +35,5 @@ describe('module', () => {
     expect(title.text()).toEqual(titleText)
   })
 })
+
+//https://iobio.io/user_guides/2019/05/20/vue-js-unit-testing-with-jest/
