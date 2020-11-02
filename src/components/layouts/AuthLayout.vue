@@ -21,7 +21,7 @@
                 absolute
                 indeterminate
                 color="progress"
-                height="6" />
+                height="2" />
             </template>
             <slot />
           </v-card>

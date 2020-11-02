@@ -40,8 +40,6 @@ export function appMountedFn() {
 export default class App extends Vue {
   private mounted(): void {
     this.$vuetify.theme.dark = localStorage.darkmode === 'true';
-    console.log(localStorage.darkmode);
-
     appMountedFn.apply(this);
   }
 }

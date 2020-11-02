@@ -4,6 +4,9 @@ import ru from 'vuetify/src/locale/ru';
 // eslint-disable-next-line
 import { Theme, VuetifyThemeVariant } from 'vuetify/types/services/theme';
 import colors from 'vuetify/lib/util/colors';
+import {
+  mdiArrowUp,
+} from '@mdi/js';
 
 Vue.use(Vuetify);
 
@@ -43,6 +46,12 @@ const theme: Theme = {
 
 export default new Vuetify({
   theme,
+  icons: {
+    iconfont: 'mdiSvg',
+    values: {
+      sort: mdiArrowUp,
+    },
+  },
   lang: {
     locales: { ru },
     current: 'ru',

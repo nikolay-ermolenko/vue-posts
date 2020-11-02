@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@mdi/font": "^3.6.95",
+    "@mdi/js": "^5.6.55",
     "core-js": "^3.6.5",
     "roboto-fontface": "*",
     "rxjs": "^6.6.3",
