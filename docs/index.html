@@ -19,6 +19,9 @@
         background-color: #f3f3f3;
         z-index: 99999;
       }
+      .init-loader.dark-mode {
+        background-color: #121212;
+      }
       .init-loader.fade-out {
         animation: fadeout 1100ms;
         opacity: 0;
@@ -39,7 +42,9 @@
         text-transform: capitalize;
         color: #979fd0;
       }
-
+      .init-loader.dark-mode > .init-loader-inner > span {
+        color: #999;
+      }
       .loading {
         display: flex;
         justify-content: center;
@@ -52,6 +57,9 @@
         background: #979fd0;
         border-radius: 50%;
         animation: 0.9s bounce infinite alternate;
+      }
+      .init-loader.dark-mode .loading > div {
+        background: #666;
       }
 
       .loading > div:nth-child(2) {
@@ -67,4 +75,8 @@
           opacity: 0.3;
           transform: translate3d(0, -1rem, 0);
         }
-      }</style><link href="js/about.970a5fe8.js" rel="prefetch"><link href="css/chunk-vendors.68f2fb81.css" rel="preload" as="style"><link href="js/app.90ae16e7.js" rel="preload" as="script"><link href="js/chunk-vendors.ca75a6ad.js" rel="preload" as="script"><link href="css/chunk-vendors.68f2fb81.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but zzz doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><div id="init-loader" class="init-loader"><div class="init-loader-inner"><div class="loading"><div></div><div></div><div></div></div><span id="init-loader-text">Загрузка...</span></div></div><script src="js/chunk-vendors.ca75a6ad.js"></script><script src="js/app.90ae16e7.js"></script></body></html>
+      }</style><link href="js/about.970a5fe8.js" rel="prefetch"><link href="css/chunk-vendors.07ca83cb.css" rel="preload" as="style"><link href="js/app.b07b8ced.js" rel="preload" as="script"><link href="js/chunk-vendors.7d736096.js" rel="preload" as="script"><link href="css/chunk-vendors.07ca83cb.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but zzz doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><div id="init-loader" class="init-loader"><div class="init-loader-inner"><div class="loading"><div></div><div></div><div></div></div><span id="init-loader-text">Загрузка...</span></div></div><script>if (localStorage['darkmode'] === 'true') {
+        var loaderCnt = document.getElementById('init-loader');
+
+        loaderCnt.classList.add('dark-mode');
+      }</script><script src="js/chunk-vendors.7d736096.js"></script><script src="js/app.b07b8ced.js"></script></body></html>
