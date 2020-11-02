@@ -28,6 +28,9 @@
         background-color: #f3f3f3;
         z-index: 99999;
       }
+      .init-loader.dark-mode {
+        background-color: #121212;
+      }
       .init-loader.fade-out {
         animation: fadeout 1100ms;
         opacity: 0;
@@ -48,7 +51,9 @@
         text-transform: capitalize;
         color: #979fd0;
       }
-
+      .init-loader.dark-mode > .init-loader-inner > span {
+        color: #999;
+      }
       .loading {
         display: flex;
         justify-content: center;
@@ -61,6 +66,9 @@
         background: #979fd0;
         border-radius: 50%;
         animation: 0.9s bounce infinite alternate;
+      }
+      .init-loader.dark-mode .loading > div {
+        background: #666;
       }
 
       .loading > div:nth-child(2) {
@@ -93,8 +101,15 @@
           <div></div>
           <div></div>
         </div>
-      <span id="init-loader-text">Загрузка...</span>
+        <span id="init-loader-text">Загрузка...</span>
       </div>
     </div>
+    <script type="text/javascript">
+      if (localStorage['darkmode'] === 'true') {
+        var loaderCnt = document.getElementById('init-loader');
+
+        loaderCnt.classList.add('dark-mode');
+      }
+    </script>
   </body>
 </html>

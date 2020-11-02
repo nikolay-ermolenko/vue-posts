@@ -1,28 +1,48 @@
 import Vue from 'vue';
-import Vuetify, {
-  VApp,
-  VAppBar,
-  VBtn,
-  VIcon,
-  VImg,
-  VMain,
-  VSpacer,
-} from 'vuetify/lib';
+import Vuetify from 'vuetify/lib';
 import ru from 'vuetify/src/locale/ru';
+// eslint-disable-next-line
+import { Theme, VuetifyThemeVariant } from 'vuetify/types/services/theme';
+import colors from 'vuetify/lib/util/colors';
 
-Vue.use(Vuetify, {
-  components: {
-    VApp,
-    VAppBar,
-    VBtn,
-    VIcon,
-    VImg,
-    VMain,
-    VSpacer,
+Vue.use(Vuetify);
+
+const light: VuetifyThemeVariant = {
+  primary: colors.red.base,
+  secondary: colors.red.base,
+  accent: colors.red.base,
+  info: colors.red.base,
+  warning: colors.red.base,
+  error: colors.red.base,
+  success: colors.red.base,
+  progress: colors.blue.base,
+};
+
+const dark: VuetifyThemeVariant = {
+  primary: colors.blue.base,
+  secondary: colors.blue.base,
+  accent: colors.blue.base,
+  info: colors.blue.base,
+  warning: colors.blue.base,
+  error: colors.blue.base,
+  success: colors.blue.base,
+  progress: colors.lime.base,
+};
+
+const theme: Theme = {
+  dark: false,
+  disable: false,
+  default: 'light',
+  options: {},
+  currentTheme: light,
+  themes: {
+    light,
+    dark,
   },
-});
+};
 
 export default new Vuetify({
+  theme,
   lang: {
     locales: { ru },
     current: 'ru',
