@@ -14,7 +14,8 @@
           <v-card
             tile
             :loading="isLoading"
-            :disabled="!isLoading"
+            :disabled="isLoading"
+            color="loginForm"
             elevation="2">
             <template #progress>
               <v-progress-linear
@@ -35,7 +36,7 @@ import { Vue, Component } from 'vue-property-decorator';
 
 @Component
 export default class AuthLayout extends Vue {
-  isLoading = true
+  isLoading = false
 }
 </script>
 

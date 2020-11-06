@@ -1,12 +1,15 @@
 <template>
   <v-form
+    v-model="valid"
     class="form-login"
-    ref="form">
+    ref="form"
+    @submit.prevent="onSubmitForm">
     <v-card-title class="justify-center">
       <v-avatar
         tile
-        size="140">
-        <v-icon>{{ icons.mdiAccount }}</v-icon>
+        size="140"
+        class="ma-6">
+        <Logo />
       </v-avatar>
     </v-card-title>
     <v-card-title class="justify-center py-0">
@@ -15,8 +18,8 @@
     <v-card-text class="px-sm-8 px-md-12">
       <v-text-field
         v-model="formValue.username"
+        autofocus
         required
-        ref="username"
         label="Логин">
         <template #prepend-inner>
           <v-icon>{{ icons.mdiAccount }}</v-icon>
@@ -28,10 +31,37 @@
             @click="onClearClick">{{ icons.mdiClose }}</v-icon>
         </template>
       </v-text-field>
+      <v-text-field
+        v-model="formValue.password"
+        :rules="rules"
+        :type="showPassword ? 'text' : 'password'"
+        required
+        label="Пароль">
+        <template #prepend-inner>
+          <v-icon>{{ icons.mdiLock }}</v-icon>
+        </template>
+        <template #append>
+          <v-icon
+            tabindex="88"
+            @click="showPassword = !showPassword">
+            {{ showPassword ? icons.mdiEye : icons.mdiEyeOff }}
+          </v-icon>
+        </template>
+      </v-text-field>
       <v-switch
         v-model="darkMode"
         label="Dark Mode" />
     </v-card-text>
+    <v-card-actions>
+      <v-spacer />
+      <v-btn
+        :dark="valid"
+        min-width="100"
+        large
+        tile
+        :disabled="isLoading || !valid"
+        type="submit">Войти</v-btn>
+    </v-card-actions>
   </v-form>
 </template>
 
@@ -44,8 +74,13 @@ import {
   mdiLock,
   mdiClose,
 } from '@mdi/js';
+import Logo from '@/components/icons/Logo.vue';
 
-@Component
+@Component({
+  components: {
+    Logo,
+  },
+})
 export default class LoginForm extends Vue {
   private get darkMode(): boolean {
     return this.$vuetify.theme.dark;
@@ -56,7 +91,15 @@ export default class LoginForm extends Vue {
     localStorage.darkmode = Boolean(value);
   }
 
-  isLoading = true
+  private valid = true
+
+  private isLoading = false
+
+  private showPassword = false
+
+  private rules: Function[] = [
+    (v: string) => !!v || 'Это поле обязательно для заполнения',
+  ]
 
   private icons: { [key: string]: string } = {
     mdiAccount,
@@ -88,6 +131,10 @@ export default class LoginForm extends Vue {
   private onClearClick(): void {
     // eslint-disable-next-line
     (this.$refs.form as any).reset();
+  }
+
+  private onSubmitForm() {
+    console.log(this, 'SUBMIT');
   }
 }
 </script>

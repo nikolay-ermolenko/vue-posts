@@ -19,6 +19,7 @@ const light: VuetifyThemeVariant = {
   error: colors.red.base,
   success: colors.red.base,
   progress: colors.blue.base,
+  loginForm: colors.lightBlue.lighten4,
 };
 
 const dark: VuetifyThemeVariant = {
@@ -30,6 +31,7 @@ const dark: VuetifyThemeVariant = {
   error: colors.blue.base,
   success: colors.blue.base,
   progress: colors.lime.base,
+  loginForm: colors.blue.darken4,
 };
 
 const theme: Theme = {
