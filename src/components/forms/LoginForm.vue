@@ -48,12 +48,13 @@
           </v-icon>
         </template>
       </v-text-field>
-      <v-switch
-        v-model="darkMode"
-        label="Dark Mode" />
     </v-card-text>
     <v-card-actions>
       <v-spacer />
+      <v-switch
+        v-model="darkMode"
+        label="Dark Mode"
+        class="mr-4"/>
       <v-btn
         :dark="valid"
         min-width="100"
