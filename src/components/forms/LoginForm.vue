@@ -151,6 +151,10 @@ export default class LoginForm extends Vue {
   input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
   }
+
+  .login-title {
+    word-break: break-word;
+  }
 }
 .theme--dark {
   .form-login{
