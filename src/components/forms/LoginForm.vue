@@ -150,6 +150,7 @@ export default class LoginForm extends Vue {
         'Content-Type': 'application/json;charset=utf-8',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': true,
+        'Content-Security-Policy': 'upgrade-insecure-requests',
       },
     })
       // eslint-disable-next-line
