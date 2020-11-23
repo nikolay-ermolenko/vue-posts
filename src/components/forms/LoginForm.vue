@@ -20,6 +20,7 @@
         v-model="formValue.username"
         autofocus
         required
+        :rules="rules"
         label="Логин">
         <template #prepend-inner>
           <v-icon>{{ icons.mdiAccount }}</v-icon>
@@ -33,9 +34,9 @@
       </v-text-field>
       <v-text-field
         v-model="formValue.password"
+        required
         :rules="rules"
         :type="showPassword ? 'text' : 'password'"
-        required
         label="Пароль">
         <template #prepend-inner>
           <v-icon>{{ icons.mdiLock }}</v-icon>
@@ -67,7 +68,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import axios, { AxiosError } from 'axios';
+import { Vue, Component, Emit } from 'vue-property-decorator';
 import {
   mdiAccount,
   mdiEye,
@@ -134,8 +136,28 @@ export default class LoginForm extends Vue {
     (this.$refs.form as any).reset();
   }
 
+  @Emit('loginstart')
+  private loginstart() {
+    return this.$vuetify;
+  }
+
   private onSubmitForm() {
-    console.log(this, 'SUBMIT');
+    this.loginstart();
+    axios({
+      url: 'http://yan.terni.ru/cp/api/settings',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
+    })
+      // eslint-disable-next-line
+      .then((a: any) => console.log(123, a))
+      // eslint-disable-next-line
+      .catch((e: AxiosError) => console.log(45345, e.response))
+      .finally(() => this.$emit('loginend'));
+    console.log(this, 'SUBMIT', this.formValue);
   }
 }
 </script>

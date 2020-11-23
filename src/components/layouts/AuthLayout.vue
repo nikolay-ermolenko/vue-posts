@@ -21,6 +21,7 @@
               <v-progress-linear
                 absolute
                 indeterminate
+                :value="2"
                 color="progress"
                 height="2" />
             </template>
@@ -32,11 +33,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class AuthLayout extends Vue {
-  isLoading = false
+  @Prop({
+    default: false,
+  })
+  private isLoading!: boolean
 }
 </script>
 

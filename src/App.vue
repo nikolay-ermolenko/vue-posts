@@ -1,7 +1,9 @@
 <template>
   <v-app>
-    <AuthLayout>
-      <LoginForm />
+    <AuthLayout :isLoading="isLoading">
+      <LoginForm
+        @loginstart="isLoading = true"
+        @loginend="isLoading = false" />
     </AuthLayout>
   </v-app>
 </template>
@@ -38,6 +40,8 @@ export function appMountedFn() {
   },
 })
 export default class App extends Vue {
+  private isLoading = false
+
   private mounted(): void {
     this.$vuetify.theme.dark = localStorage.darkmode === 'true';
     appMountedFn.apply(this);
