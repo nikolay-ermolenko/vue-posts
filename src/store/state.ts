@@ -1,15 +1,14 @@
-export enum StatusState {
-  NotLoaded = 'NOT_LOADED',
-  LoadedSuccess = 'LOADED_SUCCESS',
-  LoadedFailure = 'LOADED_FAILURE',
+export enum RootStateFields {
+  IS_LOADING = 'isLoading',
+  STATUS = 'statusState',
 }
 
 export type RootState = {
-  isLoading: number;
-  statusState: StatusState;
+  [RootStateFields.IS_LOADING]: number;
+  [RootStateFields.STATUS]: 0 | 1 | 2 | 3;
 }
 
 export const state: RootState = {
-  isLoading: 0,
-  statusState: StatusState.NotLoaded,
+  [RootStateFields.IS_LOADING]: 0,
+  [RootStateFields.STATUS]: 0,
 };
