@@ -136,29 +136,13 @@ export default class LoginForm extends Vue {
     (this.$refs.form as any).reset();
   }
 
-  @Emit('loginstart')
-  private loginstart() {
-    return this.$vuetify;
+  @Emit('login')
+  private login() {
+    return this.formValue;
   }
 
   private onSubmitForm() {
-    this.loginstart();
-    axios({
-      url: 'http://yan.terni.ru/cp/api/settings',
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true,
-        'Content-Security-Policy': 'upgrade-insecure-requests',
-      },
-    })
-      // eslint-disable-next-line
-      .then((a: any) => console.log(123, a))
-      // eslint-disable-next-line
-      .catch((e: AxiosError) => console.log(45345, e.response))
-      .finally(() => this.$emit('loginend'));
-    console.log(this, 'SUBMIT', this.formValue);
+    this.login();
   }
 }
 </script>
@@ -172,7 +156,7 @@ export default class LoginForm extends Vue {
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    -webkit-box-shadow: 0 0 0 30px #cfd8dc inset !important;
   }
 
   .login-title {

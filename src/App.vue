@@ -1,9 +1,11 @@
 <template>
   <v-app>
-    <AuthLayout :isLoading="isLoading">
+    <div v-if="isAuthorized">AUTH</div>
+    <AuthLayout
+      v-else
+      :isLoading="isLoading">
       <LoginForm
-        @loginstart="onLoginStart"
-        @loginend="onLoginEnd" />
+        @login="onLogin" />
     </AuthLayout>
   </v-app>
 </template>
@@ -18,6 +20,7 @@ import AuthLayout from './components/layouts/AuthLayout.vue';
 import LoginForm from './components/forms/LoginForm.vue';
 import { GetterType } from './store/getters';
 import { ActionTypes } from './store/actions';
+import { IAuthCreds } from './interfaces';
 
 export function appMountedFn() {
   const loaderEl: HTMLElement | null = document.getElementById('init-loader');
@@ -47,6 +50,9 @@ export default class App extends Vue {
   @Getter(GetterType.IS_LOADING)
   private isLoading!: boolean
 
+  @Getter(GetterType.IS_AUTHORIZED)
+  private isAuthorized!: boolean
+
   @Action(ActionTypes.INCREMENT_LOADING)
   // eslint-disable-next-line
   private incrementLoading!: any
@@ -55,17 +61,17 @@ export default class App extends Vue {
   // eslint-disable-next-line
   private decrementLoading!: any
 
+  @Action(ActionTypes.LOGIN)
+  // eslint-disable-next-line
+  private login!: any
+
   private mounted(): void {
     this.$vuetify.theme.dark = localStorage.darkmode === 'true';
     appMountedFn.apply(this);
   }
 
-  private onLoginStart() {
-    this.incrementLoading();
-  }
-
-  private onLoginEnd() {
-    this.decrementLoading();
+  private onLogin(value: IAuthCreds) {
+    this.login(value);
   }
 }
 </script>

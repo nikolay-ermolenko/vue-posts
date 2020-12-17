@@ -1,14 +1,20 @@
+import { IAuthStatus } from '@/interfaces/common/auth';
+
 export enum RootStateFields {
   IS_LOADING = 'isLoading',
-  STATUS = 'statusState',
+  AUTH_STATUS = 'authStatus',
 }
 
 export type RootState = {
   [RootStateFields.IS_LOADING]: number;
-  [RootStateFields.STATUS]: 0 | 1 | 2 | 3;
+  [RootStateFields.AUTH_STATUS]: IAuthStatus;
 }
 
 export const state: RootState = {
   [RootStateFields.IS_LOADING]: 0,
-  [RootStateFields.STATUS]: 0,
+  [RootStateFields.AUTH_STATUS]: {
+    isAuthorized: false,
+    username: null,
+    permissions: [],
+  },
 };
