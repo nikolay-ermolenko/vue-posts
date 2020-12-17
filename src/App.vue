@@ -1,18 +1,74 @@
 <template>
   <v-app>
-    <div v-if="isAuthorized">
-      <v-card>
-        <v-card-title>AUTH</v-card-title>
-        <v-card-actions>
-          <v-spacer />
-          <v-switch
-            v-model="darkMode"
-            label="Dark Mode"
-            class="mr-4"/>
-          <v-btn @click="logout">LOGOUT</v-btn>
-        </v-card-actions>
-      </v-card>
-    </div>
+    <v-card
+      v-if="isAuthorized"
+      tile
+      class="col-xl-7 col-lg-8 col-md-10 pa-0 mx-auto overflow-hidden">
+
+      <v-app-bar
+        dark
+        :height="58"
+        color="deep-purple accent-4">
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+        <v-toolbar-title>My files</v-toolbar-title>
+
+        <v-spacer />
+
+        <v-switch
+          v-model="darkMode"
+          label="Dark Mode"
+          class="mr-4 mt-6"/>
+
+        <v-btn
+          icon
+          @click="logout">
+          <v-icon>{{ icons.mdiLogout }}</v-icon>
+        </v-btn>
+      </v-app-bar>
+
+       <v-navigation-drawer
+        v-model="drawer"
+        absolute
+        temporary
+        style="width:80%;min-width:300px;max-width:500px;height:calc(100vh)">
+        <template #prepend>
+          <v-app-bar
+            color="deep-purple accent-3"
+            dark>
+          </v-app-bar>
+        </template>
+<!--           <div v-bar style="width:100%;height:100%;"><div> -->
+            <v-list
+              nav
+              dense>
+              <v-list-item-group
+                v-model="group"
+                active-class="deep-purple--text">
+                <v-list-item v-for="(a, i) in [...new Array(450)]" :key="i" tile>
+                  <v-list-item-title>Foo {{i}}</v-list-item-title>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+      </v-navigation-drawer>
+
+       <v-container
+          style="overflow:auto;max-width:none;height:calc(100vh - 58px + 0%);"
+          class="ma-0 pa-0">
+      <v-card-text class="overflow-hidden">
+        The navigation drawer will appear from the bottom on smaller size screens.
+        <div style="height:7200px;width: 25px;background:rgba(255,0,0,.2);"/>
+        The navigation drawer will appear from the bottom on smaller size screens.
+      </v-card-text>
+         </v-container>
+      <v-card-actions>
+        <v-spacer />
+        <v-switch
+          v-model="darkMode"
+          label="Dark Mode"
+          class="mr-4"/>
+        <v-btn @click="logout">LOGOUT</v-btn>
+      </v-card-actions>
+    </v-card>
     <AuthLayout
       v-else
       :isLoading="isLoading">
@@ -27,6 +83,7 @@ import { Vue, Component } from 'vue-property-decorator';
 import { Action, Getter } from 'vuex-class';
 import { of } from 'rxjs';
 import { delay, first, tap } from 'rxjs/operators';
+import { mdiLogout } from '@mdi/js';
 
 import AuthLayout from './components/layouts/AuthLayout.vue';
 import LoginForm from './components/forms/LoginForm.vue';
@@ -84,6 +141,14 @@ export default class App extends Vue {
   @Action(ActionTypes.LOGOUT)
   // eslint-disable-next-line
   private logout!: any
+
+  private drawer = false;
+
+  private icons = {
+    mdiLogout,
+  };
+
+  private group = false;
 
   private get darkMode(): boolean {
     return this.$vuetify.theme.dark;
