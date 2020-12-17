@@ -33,11 +33,17 @@ class AuthService {
       );
   }
 
-  status(): Observable<IAuthStatus> {
+  status(): Observable<IAuthStatus | null> {
     return of(localStorage.authStatus)
       .pipe(
         delay(400),
-        map((authStatus: string): IAuthStatus => JSON.parse(authStatus) || null),
+        map((authStatus: string): IAuthStatus | null => {
+          try {
+            return JSON.parse(authStatus);
+          } catch (e) {
+            return null;
+          }
+        }),
       );
   }
 }

@@ -46,10 +46,10 @@ export const actions: ActionTree<RootState, RootState> & Actions = {
       .pipe(
         first(),
         finalize(() => commit(MutationType.DECREMENT_LOADING)),
-      ).subscribe((data: IAuthStatus) => {
-        if (data?.isAuthorized) {
-          commit(MutationType.SET_AUTH_STATUS, data);
-        }
+      ).subscribe((data: IAuthStatus | null) => {
+        if (data === null) return;
+
+        commit(MutationType.SET_AUTH_STATUS, data);
       });
   },
 
