@@ -1,8 +1,8 @@
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { IAuthCreds, IAuthStatus } from '@/interfaces';
 
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["login"] }] */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["login","status","logout"] }] */
 class AuthService {
   login({ username, password }: IAuthCreds): Observable<IAuthStatus> {
     const authorizedMock: IAuthStatus = {
@@ -23,6 +23,22 @@ class AuthService {
     ).pipe(
       delay(400),
     );
+  }
+
+  logout(): Observable<null> {
+    return of(null)
+      .pipe(
+        delay(400),
+        map((): null => null),
+      );
+  }
+
+  status(): Observable<IAuthStatus> {
+    return of(localStorage.authStatus)
+      .pipe(
+        delay(400),
+        map((authStatus: string): IAuthStatus => JSON.parse(authStatus) || null),
+      );
   }
 }
 

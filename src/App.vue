@@ -1,6 +1,18 @@
 <template>
   <v-app>
-    <div v-if="isAuthorized">AUTH</div>
+    <div v-if="isAuthorized">
+      <v-card>
+        <v-card-title>AUTH</v-card-title>
+        <v-card-actions>
+          <v-spacer />
+          <v-switch
+            v-model="darkMode"
+            label="Dark Mode"
+            class="mr-4"/>
+          <v-btn @click="logout">LOGOUT</v-btn>
+        </v-card-actions>
+      </v-card>
+    </div>
     <AuthLayout
       v-else
       :isLoading="isLoading">
@@ -61,12 +73,30 @@ export default class App extends Vue {
   // eslint-disable-next-line
   private decrementLoading!: any
 
+  @Action(ActionTypes.LOAD_STATUS)
+  // eslint-disable-next-line
+  private loadStatus!: any
+
   @Action(ActionTypes.LOGIN)
   // eslint-disable-next-line
   private login!: any
 
+  @Action(ActionTypes.LOGOUT)
+  // eslint-disable-next-line
+  private logout!: any
+
+  private get darkMode(): boolean {
+    return this.$vuetify.theme.dark;
+  }
+
+  private set darkMode(value: boolean) {
+    this.$vuetify.theme.dark = Boolean(value);
+    localStorage.darkmode = Boolean(value);
+  }
+
   private mounted(): void {
     this.$vuetify.theme.dark = localStorage.darkmode === 'true';
+    this.loadStatus();
     appMountedFn.apply(this);
   }
 
