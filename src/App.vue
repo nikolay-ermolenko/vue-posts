@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <v-main>
     <v-card
       v-if="isAuthorized"
       tile
@@ -8,7 +9,7 @@
       <v-app-bar
         dark
         :height="58"
-        color="deep-purple accent-4">
+        color="deep-purple accent-4 ">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
         <v-toolbar-title>My files</v-toolbar-title>
 
@@ -28,6 +29,7 @@
 
        <v-navigation-drawer
         v-model="drawer"
+        app
         absolute
         temporary
         style="width:80%;min-width:300px;max-width:500px;height:calc(100vh)">
@@ -75,6 +77,7 @@
       <LoginForm
         @login="onLogin" />
     </AuthLayout>
+    </v-main>
   </v-app>
 </template>
 
