@@ -68,7 +68,6 @@
 </template>
 
 <script lang="ts">
-import axios, { AxiosError } from 'axios';
 import { Vue, Component, Emit } from 'vue-property-decorator';
 import {
   mdiAccount,

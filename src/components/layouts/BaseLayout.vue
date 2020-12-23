@@ -1,0 +1,70 @@
+<template>
+  <v-main>
+    <v-card
+      tile
+      class="main-card col-xl-7 col-lg-8 col-md-10 pa-0 mx-auto overflow-scroll">
+      <AppBar
+        @logout="logout"
+        @toggleDrawer="drawer = !drawer" />
+      <v-navigation-drawer
+        temporary
+        fixed
+        v-model="drawer"
+        style="width:80%;min-width:300px;max-width:500px;">
+         <v-list
+            nav
+            dense>
+            <v-list-item-group
+              active-class="deep-purple--text">
+              <v-list-item v-for="(a, i) in [...new Array(30)]" :key="i" tile>
+                <v-list-item-title>Foo {{i}}</v-list-item-title>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+      </v-navigation-drawer>
+    <h1>HI</h1>
+    <div class="ma-7" style="background:rgba(125,125,125,.5);height:1760px;"></div>
+
+    </v-card>
+  </v-main>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { Action } from 'vuex-class';
+import { mdiLogout } from '@mdi/js';
+
+import AppBar from '@/components/bar/AppBar.vue';
+import { ActionTypes } from '@/store/actions';
+
+@Component({
+  components: {
+    AppBar,
+  },
+})
+export default class BaseLayout extends Vue {
+  @Action(ActionTypes.LOGOUT)
+  private logout!: never
+
+  private drawer = false;
+
+  private icons = {
+    mdiLogout,
+  };
+
+  private get darkMode(): boolean {
+    return this.$vuetify.theme.dark;
+  }
+
+  private set darkMode(value: boolean) {
+    this.$vuetify.theme.dark = Boolean(value);
+    localStorage.darkmode = Boolean(value);
+  }
+}
+</script>
+
+<style lang="scss">
+.main-card {
+  height: 100%;
+}
+</style>
