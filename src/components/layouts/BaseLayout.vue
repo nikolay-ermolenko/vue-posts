@@ -7,7 +7,14 @@
         @logout="logout"
         @toggleDrawer="drawer = !drawer" />
     <h1>HI</h1>
-    <div class="ma-7" style="background:rgba(125,125,125,.5);height:1760px;"></div>
+    <virtual-list
+      class="px-5"
+      :page-mode="true"
+      :data-key="'id'"
+      :data-sources="posts"
+      :data-component="PostItem"
+      :estimate-size="20" />
+    <!-- <div class="ma-7" style="background:rgba(125,125,125,.5);height:1760px;"></div> -->
     </v-card>
     <v-navigation-drawer
         temporary
@@ -27,8 +34,8 @@
                 :data-key="'id'"
                 :data-sources="array"
                 :data-component="MenuItem"
-                :keeps="40"
-                :estimate-size="50" />
+                :keeps="50"
+                :estimate-size="40" />
             </v-list-item-group>
           </v-list>
       </v-navigation-drawer>
@@ -43,6 +50,8 @@ import { mdiLogout } from '@mdi/js';
 
 import AppBar from '@/components/bar/AppBar.vue';
 import MenuItem from '@/components/MenuItem.vue';
+import PostItem from '@/components/PostItem.vue';
+import getSentences from '@/utils/sentences';
 import { ActionTypes } from '@/store/actions';
 
 @Component({
@@ -59,9 +68,17 @@ export default class BaseLayout extends Vue {
 
   private MenuItem = MenuItem;
 
-  private array = [...new Array(3000)].map((_, i) => ({
+  private PostItem = PostItem;
+
+  private array = [...new Array(300)].map((_, i) => ({
     id: i,
     name: `Item # ${i} :: ${Math.random()}`,
+  }))
+
+  private posts = [...new Array(1500)].map((_, i) => ({
+    id: i,
+    title: getSentences(1, 3),
+    text: getSentences(3, 12),
   }))
 
   private icons = {

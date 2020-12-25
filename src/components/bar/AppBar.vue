@@ -54,5 +54,6 @@ export default class AppBar extends Vue {
 .app-bar-main {
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 </style>
