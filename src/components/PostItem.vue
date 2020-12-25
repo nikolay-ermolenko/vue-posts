@@ -1,8 +1,10 @@
 <template>
-  <v-card class="mb-6">
-    <v-card-title>{{ source.id }} :: {{ source.title }}</v-card-title>
-    <v-card-text>{{ source.text }}</v-card-text>
-  </v-card>
+  <div class="py-3">
+    <v-card>
+      <v-card-title>{{ source.id }} :: {{ source.title }}</v-card-title>
+      <v-card-text>{{ source.text }}</v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <script lang="ts">

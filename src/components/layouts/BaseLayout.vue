@@ -9,6 +9,7 @@
     <h1>HI</h1>
     <virtual-list
       class="px-5"
+      :keeps="20"
       :page-mode="true"
       :data-key="'id'"
       :data-sources="posts"
@@ -78,7 +79,7 @@ export default class BaseLayout extends Vue {
   private posts = [...new Array(1500)].map((_, i) => ({
     id: i,
     title: getSentences(1, 3),
-    text: getSentences(3, 12),
+    text: getSentences(3, 22),
   }))
 
   private icons = {
