@@ -6,40 +6,49 @@
       <AppBar
         @logout="logout"
         @toggleDrawer="drawer = !drawer" />
-      <v-navigation-drawer
+    <h1>HI</h1>
+    <div class="ma-7" style="background:rgba(125,125,125,.5);height:1760px;"></div>
+    </v-card>
+    <v-navigation-drawer
         temporary
         fixed
         v-model="drawer"
-        style="width:80%;min-width:300px;max-width:500px;">
+        style="width:80%;min-width:300px;max-width:600px;">
          <v-list
             nav
-            dense>
+            dense
+            class="pa-0">
             <v-list-item-group
               active-class="deep-purple--text">
-              <v-list-item v-for="(a, i) in [...new Array(30)]" :key="i" tile>
-                <v-list-item-title>Foo {{i}}</v-list-item-title>
-              </v-list-item>
+              <virtual-list
+                class="list"
+                style="height: 100vh; overflow-y: auto;"
+                :page-mode="false"
+                :data-key="'id'"
+                :data-sources="array"
+                :data-component="MenuItem"
+                :keeps="40"
+                :estimate-size="50" />
             </v-list-item-group>
           </v-list>
       </v-navigation-drawer>
-    <h1>HI</h1>
-    <div class="ma-7" style="background:rgba(125,125,125,.5);height:1760px;"></div>
-
-    </v-card>
   </v-main>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import VirtualList from 'vue-virtual-scroll-list';
 import { Action } from 'vuex-class';
 import { mdiLogout } from '@mdi/js';
 
 import AppBar from '@/components/bar/AppBar.vue';
+import MenuItem from '@/components/MenuItem.vue';
 import { ActionTypes } from '@/store/actions';
 
 @Component({
   components: {
     AppBar,
+    VirtualList,
   },
 })
 export default class BaseLayout extends Vue {
@@ -47,6 +56,13 @@ export default class BaseLayout extends Vue {
   private logout!: never
 
   private drawer = false;
+
+  private MenuItem = MenuItem;
+
+  private array = [...new Array(3000)].map((_, i) => ({
+    id: i,
+    name: `Item # ${i} :: ${Math.random()}`,
+  }))
 
   private icons = {
     mdiLogout,
