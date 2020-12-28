@@ -15,7 +15,6 @@
       :data-sources="posts"
       :data-component="PostItem"
       :estimate-size="20" />
-    <!-- <div class="ma-7" style="background:rgba(125,125,125,.5);height:1760px;"></div> -->
     </v-card>
     <v-navigation-drawer
         temporary
@@ -100,5 +99,11 @@ export default class BaseLayout extends Vue {
 <style lang="scss">
 .main-card {
   height: 100%;
+}
+
+.ie-css {
+  .main-card {
+    padding-top: 58px !important;
+  }
 }
 </style>

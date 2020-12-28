@@ -56,4 +56,10 @@ export default class AppBar extends Vue {
   top: 0;
   z-index: 1;
 }
+
+.ie-css {
+  .app-bar-main {
+    position: fixed;
+  }
+}
 </style>

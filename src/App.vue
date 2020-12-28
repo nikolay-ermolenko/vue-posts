@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :class="isIE11">
     <BaseLayout
       v-if="isAuthorized" />
     <AuthLayout
@@ -48,6 +48,7 @@ export function appMountedFn() {
     LoginForm,
   },
 })
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["isIE11"] }] */
 export default class App extends Vue {
   // https://github.com/Armour/vue-typescript-admin-template
   @Getter(GetterType.IS_LOADING)
@@ -83,5 +84,17 @@ export default class App extends Vue {
   private onLogin(value: IAuthCreds) {
     this.login(value);
   }
+
+  private get isIE11(): Record<string, boolean> {
+    return {
+      'ie-css': navigator.userAgent.match(/rv:11.0/i) !== null,
+    };
+  }
 }
 </script>
+
+<style lang="scss">
+.ie-css.v-application {
+  display: block;
+}
+</style>
