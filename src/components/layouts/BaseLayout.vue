@@ -6,7 +6,7 @@
       <AppBar
         @logout="logout"
         @toggleDrawer="drawer = !drawer" />
-    <h1>HI</h1>
+    <h3 class="font-weight-light">ua: {{ userAgent }}</h3>
     <virtual-list
       class="px-5"
       :keeps="20"
@@ -60,6 +60,7 @@ import { ActionTypes } from '@/store/actions';
     VirtualList,
   },
 })
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["userAgent"] }] */
 export default class BaseLayout extends Vue {
   @Action(ActionTypes.LOGOUT)
   private logout!: never
@@ -92,6 +93,10 @@ export default class BaseLayout extends Vue {
   private set darkMode(value: boolean) {
     this.$vuetify.theme.dark = Boolean(value);
     localStorage.darkmode = Boolean(value);
+  }
+
+  private get userAgent(): string {
+    return navigator.userAgent;
   }
 }
 </script>
