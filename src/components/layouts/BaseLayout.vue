@@ -81,6 +81,7 @@ export default class BaseLayout extends Vue {
     title: getSentences(1, 3),
     text: getSentences(3, 22),
     label: '',
+    status: false,
   }))
 
   private icons = {

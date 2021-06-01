@@ -3,7 +3,16 @@
     <v-card>
       <v-card-title>{{ source.id }} :: {{ source.title }}</v-card-title>
       <v-card-text>{{ source.text }}</v-card-text>
-      <v-text-field class="my-3 mx-10" v-model="source.label"></v-text-field>
+      <v-card-actions>
+      <!-- <v-text-field class="my-3 mx-10" v-model="source.label"></v-text-field> -->
+      <v-switch
+        v-model="source.status"
+        label="Readed" >fdg</v-switch>
+       <v-btn
+        min-width="100"
+        large
+        tile>Кнопка</v-btn>
+      </v-card-actions>
     </v-card>
   </div>
 </template>
